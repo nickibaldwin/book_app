@@ -33,12 +33,12 @@ Finish time: 5:30pm
 Actual time needed to complete: 45 minutes
 
 
-Number and name of feature: ________________________________
+Number and name of feature: Add Google Books API
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 20 Minutes
 
-Start time: _____
+Start time: 6pm
 
-Finish time: _____
+Finish time: 6:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30 minutes
