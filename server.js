@@ -36,17 +36,18 @@ function getBook(req, res) {
       function bookOutput(info) {
         return new Book(info);
       }
-      res.send(arr); //res.render(pages/searches/show.ejs, {arr})
+      res.render('pages/searches/show.ejs', {arr});
     })
     .catch(error => {
       console.log(error);
+      res.render('/pages/error.ejs');
     });
 }
 function Book(returnedData) {
-//   this.image_url = returnedData.volumeInfo.imageLinks.thumbnail | 'https://i.imgur.com/J5LVHEL.jpg';
+  this.image_url = returnedData.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = returnedData.volumeInfo.title;
   this.author = returnedData.volumeInfo.authors[0] || 'Error, no author found';
-  this.description = '';
+  this.description = returnedData.volumeInfo.description;
 }
 
 app.listen(PORT, () => console.log(`up on http://localhost:${PORT}`));
