@@ -21,8 +21,14 @@ app.post('/getBooks', getBook);//call the getBook
 
 function getBook(req, res) {
 //   const book = req.query.body;
-  console.log(req.body);
-  const url = 'https://www.googleapis.com/books/v1/volumes?q=inauthor=frank';
+  let url = 'https://www.googleapis.com/books/v1/volumes?q=';
+
+  if (req.body.authorIs) {
+    url+=`inauthor:${req.body.name}`;
+  } else if (req.body.titleIs){
+    url+=`intitle:${req.body.name}`;
+  }
+  console.log(url);
 
   superagent.get(url)
     .then(returnedData => {
@@ -30,17 +36,16 @@ function getBook(req, res) {
       function bookOutput(info) {
         return new Book(info);
       }
-      console.log(res);
       res.send(arr); //res.render(pages/searches/show.ejs, {arr})
     })
     .catch(error => {
-      res.status(500).send('Ooops, I broke it again', error);
+      console.log(error);
     });
 }
-function Book() {
+function Book(returnedData) {
 //   this.image_url = returnedData.volumeInfo.imageLinks.thumbnail | 'https://i.imgur.com/J5LVHEL.jpg';
-  this.title = '';
-  this.author = '';
+  this.title = returnedData.volumeInfo.title;
+  this.author = returnedData.volumeInfo.authors[0] || 'Error, no author found';
   this.description = '';
 }
 
