@@ -3,21 +3,55 @@
 const express = require('express');
 require('dotenv').config();
 const superagent = require('superagent');
+const pg = require('pg');
 
 const app = express();
 const PORT = process.env.PORT;
+const DATABASE_URL = process.env.DATABASE_URL;
+
+const client = new pg.Client(DATABASE_URL);
+client.on('error', err => console.error(err));
 
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static('./public')); //go look in a folder called public for anything CSS related
 // app.get('/', (req, res) => {res.render('./pages/index.ejs')});
-app.get('/', (req, res) => { res.render('./pages/searches/new'); });
+app.get('/', renderHome);
+app.get('/books/:id', singleBook);
 
-app.post('/new_search', (req, res) => {
-  console.log('this is from searches', req.body);
-});
+app.get('/new_search', newSearch);
 
 app.post('/getBooks', getBook);//call the getBook
+app.post('/books', addBook);
+
+function addBook(req,res){
+  const sqlStr = 'INSERT INTO bookapp (title, author, image_url, description) VALUES ($1, $2, $3, $4) RETURNING id, title, author, image_url, description';
+  const sqlArr = [req.body.title, req.body.author, req.body.image_url, req.body.description];
+  client.query(sqlStr, sqlArr).then(results => {
+    console.log(results);
+    res.redirect('/books/' + results.rows[0].id);
+  });
+}
+
+function renderHome(req, res){
+  const sql = 'SELECT * FROM bookapp';
+  client.query(sql).then(results => {
+    res.render('./pages/index.ejs', {collection : results.rows});
+  });
+}
+
+function newSearch(req, res) {
+  res.render('./pages/searches/new.ejs');
+}
+
+function singleBook(req, res) {
+  const sql = 'SELECT * FROM bookapp WHERE id=$1';
+  const sqlValue = [req.params.id];
+  client.query(sql, sqlValue).then(results => {
+    console.log(results);
+    res.render('./pages/books/detail.ejs', {book : results.rows[0]});
+  }); 
+}
 
 function getBook(req, res) {
 //   const book = req.query.body;
@@ -46,8 +80,13 @@ function getBook(req, res) {
 function Book(returnedData) {
   this.image_url = returnedData.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = returnedData.volumeInfo.title;
+  // this.isbn = //TO DO;
   this.author = returnedData.volumeInfo.authors[0] || 'Error, no author found';
   this.description = returnedData.volumeInfo.description;
+  //TO DO add sql code here
 }
 
-app.listen(PORT, () => console.log(`up on http://localhost:${PORT}`));
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => console.log(`up on http://localhost:${PORT}`));
+  });
