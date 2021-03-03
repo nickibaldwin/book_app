@@ -32,10 +32,10 @@
                         <%=arr[i].description%>
                     </p>
                     <form action="/books" method="post">
-                        <input hidden name="title" type="text" value=<%=arr[i].title %>>
-                        <input hidden name="author" type="text" value=<%=arr[i].author %>>
-                        <input hidden name="description" type="text" value=<%=arr[i].description %>>
-                        <input hidden name="image_url" type="text" value=<%=arr[i].image_url %>>
+                        <input hidden name="title" type="text" value="<%=arr[i].title %>">
+                        <input hidden name="author" type="text" value="<%=arr[i].author %>">
+                        <input hidden name="description" type="text" value="<%=arr[i].description %>">
+                        <input hidden name="image_url" type="text" value="<%=arr[i].image_url %>">
                         <button type="submit">Save Book</button>
                     </form>
                 </li>
