@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/module.css">
     <title>Document</title>
 </head>
-<body>
-<header>
-    <h1>Results Page</h1>
-</header>
 
-<main>
-    <ul>
-        <% for (let i = 0; i < arr.length; i++) { %>
-            <li>
-                <img src="<%=arr[i].image_url%>" alt="">
-                <h2><%=arr[i].title%></h2>
-                <h3><%=arr[i].author%></h3>
-                <p><%=arr[i].description%></p>
-            </li>
-        <% } %>
-    </ul>
-</main>
+<body>
+    <header>
+        <h1>Results Page</h1>
+    </header>
+
+    <main>
+        <ul>
+            <% for (let i=0; i < arr.length; i++) { %>
+                <li>
+                    <img src="<%=arr[i].image_url%>" alt="">
+                    <h2>
+                        <%=arr[i].title%>
+                    </h2>
+                    <h3>
+                        <%=arr[i].author%>
+                    </h3>
+                    <p>
+                        <%=arr[i].description%>
+                    </p>
+                    <form action="/books" method="post">
+                        <input hidden name="title" type="text" value=<%=arr[i].title %>>
+                        <input hidden name="author" type="text" value=<%=arr[i].author %>>
+                        <input hidden name="description" type="text" value=<%=arr[i].description %>>
+                        <input hidden name="image_url" type="text" value=<%=arr[i].image_url %>>
+                        <button type="submit">Save Book</button>
+                    </form>
+                </li>
+                <% } %>
+        </ul>
+    </main>
 
 </body>
+
 </html>
