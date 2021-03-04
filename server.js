@@ -1,17 +1,25 @@
 'use strict';
 
-const express = require('express');
+//Environment Variables
 require('dotenv').config();
+
+//Application Dependencies 
+const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
 
+//Application Setup
 const app = express();
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
+//Database Setup
 const client = new pg.Client(DATABASE_URL);
 client.on('error', err => console.error(err));
 
+//Page Routes
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static('./public')); //go look in a folder called public for anything CSS related
@@ -24,11 +32,31 @@ app.get('/new_search', newSearch);
 app.post('/getBooks', getBook);//call the getBook
 app.post('/books', addBook);
 
+app.get('/add', showForm);
+app.delete('/books/:id', deleteBook);
+
+//Route Handlers
+
+function deleteBook(req, res) {
+  const id = req.params.id;
+  const sqlStr = `DELETE FROM bookapp WHERE id=${id}`;
+  client.query(sqlStr)
+    .then(() => res.status(200).redirect('/'))
+    .catch(err => handleError(err, res));
+}
+
+function showForm(req, res) {
+  res.render('pages/index.ejs');
+}
+
+function handleError(error, res) {
+  res.render('pages/error.ejs', {error: error});
+}
+
 function addBook(req,res){
   const sqlStr = 'INSERT INTO bookapp (title, author, image_url, description) VALUES ($1, $2, $3, $4) RETURNING id, title, author, image_url, description';
   const sqlArr = [req.body.title, req.body.author, req.body.image_url, req.body.description];
   client.query(sqlStr, sqlArr).then(results => {
-    console.log(results);
     res.redirect('/books/' + results.rows[0].id);
   });
 }
@@ -49,7 +77,7 @@ function singleBook(req, res) {
   const sqlValue = [req.params.id];
   client.query(sql, sqlValue).then(results => {
     res.render('./pages/books/detail.ejs', {book : results.rows[0]});
-  }); 
+  });
 }
 
 function getBook(req, res) {
@@ -78,7 +106,7 @@ function getBook(req, res) {
     });
 }
 function Book(returnedData) {
-  this.image_url = returnedData.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
+  this.image_url = returnedData.volumeInfo.imageLinks ? returnedData.volumeInfo.imageLinks.smallThumbnail.replace(/^http:\/\//i, 'https://') : 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = returnedData.volumeInfo.title;
   // this.isbn = //TO DO;
   this.author = returnedData.volumeInfo.authors[0] || 'Error, no author found';
