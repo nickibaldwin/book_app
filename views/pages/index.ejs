@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Book Search</title>
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/layout.css">
@@ -27,9 +27,15 @@
                 <img src="<%= book.image_url %>">
                 <!-- TO DO ADD BUTTON TO DETAILS PAGE OR DELETE BOOK FROM COLLECTION-->
             </li>
-
+        </ul>
+            <h2 class="view-title">Remove Book</h2>
+            <form action="/books/<%= book.id %>?_method=DELETE" method="post">
+                <button type="submit">Remove Book</button>
+            </form>
+            
             <% }) %>
-    </ul>
+
+
 
 </body>
 

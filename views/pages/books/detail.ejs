@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/module.css">
+    <title>Book Search</title>
 </head>
 <body>
     <h1>Book Details</h1>
@@ -12,5 +16,7 @@
     <p><%= book.author %></p>
     <p><%= book.description %></p>
     <img src="<%= book.image_url %>">
+    <a href="/new_search"><button>New Search</button></a>
+    <a href="/"><button>View Collection</button></a>
 </body>
 </html>
