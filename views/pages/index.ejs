@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <h1>Hello World</h1>
+    <h1>Your Collection Has <%= collection.length %> Books</h1>
+    <a href="/new_search"><button>New Search</button></a>
     <ul>
         <% collection.forEach(book=> { %>
             <li>
@@ -23,7 +24,8 @@
                 <p>
                     <%= book.description %>
                 </p>
-
+                <img src="<%= book.image_url %>">
+                <!-- TO DO ADD BUTTON TO DETAILS PAGE OR DELETE BOOK FROM COLLECTION-->
             </li>
 
             <% }) %>

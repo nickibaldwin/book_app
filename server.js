@@ -48,7 +48,6 @@ function singleBook(req, res) {
   const sql = 'SELECT * FROM bookapp WHERE id=$1';
   const sqlValue = [req.params.id];
   client.query(sql, sqlValue).then(results => {
-    console.log(results);
     res.render('./pages/books/detail.ejs', {book : results.rows[0]});
   }); 
 }
@@ -56,13 +55,14 @@ function singleBook(req, res) {
 function getBook(req, res) {
 //   const book = req.query.body;
   let url = 'https://www.googleapis.com/books/v1/volumes?q=';
-
-  if (req.body.authorIs) {
-    url+=`inauthor:${req.body.name}`;
-  } else if (req.body.titleIs){
-    url+=`intitle:${req.body.name}`;
+  console.log(req.body);
+  if (req.body.name[1] === 'author') {
+    url+=`inauthor:${req.body.name[0]}`;
+  } else if (req.body.name[1] === 'title'){
+    url+=`intitle:${req.body.name[0]}`;
   }
   console.log(url);
+
 
   superagent.get(url)
     .then(returnedData => {
