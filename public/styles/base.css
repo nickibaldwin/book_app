@@ -5,3 +5,7 @@ body {
 h1 {
     font-size: 60px;
 }
+
+li {
+    font-size: medium;
+}

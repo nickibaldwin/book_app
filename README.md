@@ -75,3 +75,13 @@ Also had lots of TA help- thanks, Chance, Bryant, Paul!
     Finish time: 3pm
 
     Actual time needed to complete: 1 hour
+
+6. Number and name of feature: Heroku Deployment - debug to get deployed - Thank Chance! 
+
+    Estimate of time needed to complete: 45 minutes
+
+    Start time: 2pm
+
+    Finish time: 3pm
+
+    Actual time needed to complete: 1 hour
