@@ -1,7 +1,7 @@
 # book_app
 
 **Author**: Nicki Baldwin
-**Version**: 1.1.0
+**Version**: 1.6.0
 
 ## Overview
 I want to be able to search for books in a database, by title or author.
@@ -9,7 +9,7 @@ I want to be able to search for books in a database, by title or author.
 
 ## Getting Started
 - Run npm install in terminal.
-Setup .env PORT=[your choice]
+Setup .env PORT=3009
 
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
@@ -66,7 +66,7 @@ Also had lots of TA help- thanks, Chance, Bryant, Paul!
 
     Actual time needed to complete: 45 minutes
 
-5. Number and name of feature: Heroku Deployment - debug to get deployed - Thank Chance! 
+5. Number and name of feature: Heroku Deployment - debug to get deployed - Thank Chance!
 
     Estimate of time needed to complete: 45 minutes
 
@@ -76,9 +76,9 @@ Also had lots of TA help- thanks, Chance, Bryant, Paul!
 
     Actual time needed to complete: 1 hour
 
-6. Number and name of feature: Heroku Deployment - debug to get deployed - Thank Chance! 
+6. Number and name of feature: CSS Styling (lab 11 re-submit)
 
-    Estimate of time needed to complete: 45 minutes
+    Estimate of time needed to complete: 1 hour
 
     Start time: 2pm
 
