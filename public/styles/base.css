@@ -1,11 +1,77 @@
 body {
-    background-color: #fec5bb;
+    /* background-color: #FAE1DD; */
+    background-color: #f8edeb;
+    color: #545454;
+    width: 375px;
+    height: fit-content;
+    margin: auto;
+    font-family: 'Oswald', sans-serif;
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 20px;
+    margin-top: 3.5%;
+    margin-left: 2.5%;
 }
 
-li {
+ul {
     font-size: medium;
+    width: 100%;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+ul img {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    margin-top: 5%;
+}
+
+p {
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.book-results {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+h2.view-title {
+    color: black;
+    margin-bottom: 2%;
+}
+
+header {
+    background-color: #14213d;
+    color: #f8edeb;
+    width: 100%;
+    height: 6.5%;
+    margin-bottom: ;
+    float: left;
+}
+
+#collection-results {
+    text-align: center;
+    background-color: #fca311;
+    height: 5%;
+    width: 100%;
+    float: left;
+    color: white;
+}
+
+#collection-results h3 {
+    display: inline-block;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+form {
+    padding-bottom: 2.5%;
+    font-family: 'Oswald', sans-serif;
 }

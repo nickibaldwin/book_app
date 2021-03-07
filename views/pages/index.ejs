@@ -10,28 +10,40 @@
     <link rel="stylesheet" href="./styles/base.css">
     <link rel="stylesheet" href="./styles/layout.css">
     <link rel="stylesheet" href="./styles/module.css">
+<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-    <h1>Your Collection Has <%= collection.length %> Books</h1>
-    <a href="/new_search"><button>New Search</button></a>
-    <ul>
-        <% collection.forEach(book=> { %>
-            <li>
-                <h1>
-                    <%= book.title %>
-                </h1>
-                <p>
-                    <%= book.description %>
-                </p>
-                <img src="<%= book.image_url %>">
-                <!-- TO DO ADD BUTTON TO DETAILS PAGE OR DELETE BOOK FROM COLLECTION-->
-            </li>
-        </ul>
-            <h2 class="view-title">Remove Book</h2>
-            <form action="/books/<%= book.id %>?_method=DELETE" method="post">
-                <button type="submit">Remove Book</button>
-            </form>
+    <header>
+        <h1>Best Books</h1>
+        <!-- <a href="/new_search"><button>New Search</button></a> -->
+    </header>
+    <div id="collection-results">
+        <h3>Collection Results <%= collection.length %> </h3>
+    </div>
+    <% collection.forEach(book=> { %>
+        <div class="book-results">
+            <ul>
+                <li>
+                    <img src="<%= book.image_url %>">
+                    <h1>
+                        <%= book.title %>
+                    </h1>
+                    <h2>
+                        <%= book.author %>
+                    </h2>
+                    <p>
+                        <%= book.description %>
+                    </p>
+                </li>
+            </ul>
+                <h2 class="view-title">Remove Book From Your Collection:</h2>
+                <form action="/books/<%= book.id %>?_method=DELETE" method="post">
+                    <!-- <input type="submit" value="delete"> -->
+                    <button type="submit">Remove Book</button>
+                </form>
+        </div>
             
             <% }) %>
 
